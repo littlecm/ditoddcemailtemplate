@@ -4,7 +4,7 @@ def generate_email(to, name, location, main_url, date, staging_url, manager):
     email_template = f"""
 Hey {to} Support,
 
-I'm reaching out regarding {name} in {location} ({main_url}). We are transitioning our website from Dealer Inspire to Dealer.com, with the changeover scheduled for tomorrow, {date}.
+I'm reaching out regarding {name} in {location} ({main_url}). We are transitioning our website from Dealer Inspire to Dealer.com, with the changeover scheduled for {date}.
 
 To ensure a smooth transition, can you confirm if we require updated integration scripts compatible with Dealer.com for our services with you? Our staging site, {staging_url}, will switch over to our main website, {main_url}.
 
