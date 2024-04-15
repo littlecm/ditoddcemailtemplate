@@ -1,22 +1,27 @@
 import streamlit as st
+from streamlit.components.v1 import html
 
-def generate_email(to, name, location, main_url, date, staging_url, manager):
+def generate_email_html(to, name, location, main_url, date, staging_url, manager):
     email_template = f"""
-Hey {to} Support,
+<html>
+<body>
+<p>Hey <strong>{to} Support</strong>,</p>
 
-I'm reaching out regarding {name} in {location} ({main_url}). We are transitioning our website from Dealer Inspire to Dealer.com, with the changeover scheduled for {date}.
+<p>I'm reaching out regarding <strong>{name}</strong> in <strong>{location}</strong> (<a href="{main_url}">{main_url}</a>). We are transitioning our website from Dealer Inspire to Dealer.com, with the changeover scheduled for <strong>{date}</strong>.</p>
 
-To ensure a smooth transition, can you confirm if we require updated integration scripts compatible with Dealer.com for our services with you? Our staging site, {staging_url}, will switch over to our main website, {main_url}.
+<p>To ensure a smooth transition, can you confirm if we require updated integration scripts compatible with Dealer.com for our services with you? Our staging site, <a href="{staging_url}">{staging_url}</a>, will switch over to our main website, <a href="{main_url}">{main_url}</a>.</p>
 
-Could you assist with implementing these updates on our staging site (if time permits) for review before we go live? Your prompt support would greatly aid in maintaining uninterrupted service for our customers. Included in this email is {manager}, who is our Project Manager at Dealer.com.
+<p>Could you assist with implementing these updates on our staging site (if time permits) for review before we go live? Your prompt support would greatly aid in maintaining uninterrupted service for our customers. Included in this email is <strong>{manager}</strong>, who is our Project Manager at Dealer.com.</p>
 
-Let me know if you need any additional information from {manager} or I!
+<p>Let me know if you need any additional information from {manager} or I!</p>
 
-Thanks in advance!
+<p>Thanks in advance!</p>
+</body>
+</html>
 """
     return email_template
 
-st.title("Email Template Generator for Dealership Website Transition")
+st.title("HTML Email Template Generator for Dealership Website Transition")
 
 third_party = st.text_input("Third Party Name")
 dealership_name = st.text_input("Dealership Name")
@@ -27,5 +32,6 @@ staging_site_url = st.text_input("Dealership Staging Site URL")
 project_manager = st.text_input("Project Manager Name")
 
 if st.button("Generate Email"):
-    email = generate_email(third_party, dealership_name, dealership_location, dealership_url, switch_over_date, staging_site_url, project_manager)
-    st.text_area("Copy the email template below:", email, height=300)
+    email_html = generate_email_html(third_party, dealership_name, dealership_location, dealership_url, switch_over_date, staging_site_url, project_manager)
+    st.text_area("Copy and paste the HTML below into your email client:", email_html, height=300)
+    html(email_html)  # Display the formatted HTML for preview
